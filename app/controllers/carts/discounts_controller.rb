@@ -6,7 +6,7 @@ module Carts
     end
 
     def update
-      discount = Discount.find_by(id: params[:id])
+      discount = Discount.find(params[:id])
       discount.update!(discount_params)
       render_response
     end

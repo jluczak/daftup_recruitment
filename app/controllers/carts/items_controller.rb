@@ -11,7 +11,7 @@ module Carts
     end
 
     def update
-      item = Item.find_by(id: params[:id])
+      item = Item.find(params[:id])
       item.update!(item_params)
 
       render_response
