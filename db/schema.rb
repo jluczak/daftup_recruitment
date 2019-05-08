@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_08_074524) do
+ActiveRecord::Schema.define(version: 2019_05_08_092505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 2019_05_08_074524) do
     t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "discounts_products", id: false, force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "discount_id", null: false
+    t.index ["discount_id", "product_id"], name: "index_discounts_products_on_discount_id_and_product_id"
+    t.index ["product_id", "discount_id"], name: "index_discounts_products_on_product_id_and_discount_id"
   end
 
   create_table "items", force: :cascade do |t|
