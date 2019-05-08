@@ -7,20 +7,27 @@ module Carts
       else
         Item.create!(item_params)
       end
-      render json: Item.all, status: 201
+      render_response
     end
 
     def update
       item = Item.find_by(id: params[:id])
       item.update!(item_params)
 
-      render json: Item.all
+      render_response
     end
 
     private
 
     def item_params
       params.permit(:quantity, :product_id)
+    end
+
+    def render_response
+      render json: {
+         items: ActiveModel::Serializer::CollectionSerializer.new(Item.all, each_serializer: ItemSerializer),
+         discounts: ActiveModel::Serializer::CollectionSerializer.new(Discount.all, each_serializer: DiscountSerializer),
+      }
     end
   end
 end
