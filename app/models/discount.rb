@@ -3,7 +3,8 @@ class Discount < ApplicationRecord
   validates :kind, inclusion: { in: KINDS }
   validate :count_or_price?
   has_and_belongs_to_many :products
-  validates :products, presence: true
+  validates :name, presence: true
+  validates :product_ids, :length => { :minimum => 1 }
 
   private
 
