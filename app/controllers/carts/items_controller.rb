@@ -20,8 +20,8 @@ module Carts
 
     def render_response
       render json: {
-         items: ActiveModel::Serializer::CollectionSerializer.new(Item.all, each_serializer: ItemSerializer),
-         discounts: ActiveModel::Serializer::CollectionSerializer.new(Discount.all, each_serializer: DiscountSerializer),
+         items: serialized_collection(Item.all, ItemSerializer),
+         discounts: serialized_collection(Discount.all, DiscountSerializer),
       }
     end
   end

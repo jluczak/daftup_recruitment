@@ -9,4 +9,9 @@ class ApplicationController < ActionController::API
    def render_not_found_response(exception)
     render json: { error: exception.message }, status: :not_found
   end
+
+  def serialized_collection(collection, serializer)
+    ActiveModel::Serializer::CollectionSerializer
+      .new(collection, each_serializer: serializer)
+  end
 end
