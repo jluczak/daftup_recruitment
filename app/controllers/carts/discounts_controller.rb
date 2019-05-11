@@ -1,13 +1,13 @@
 module Carts
   class DiscountsController < ApplicationController
     def create
-      Discount.create!(discount_params)
+      Discount.create(discount_params)
       render_response
     end
 
     def update
       discount = Discount.find(params[:id])
-      discount.update!(discount_params)
+      discount.update(discount_params)
       render_response
     end
 
