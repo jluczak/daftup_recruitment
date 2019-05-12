@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
@@ -13,9 +15,9 @@ RSpec.describe Item, type: :model do
   end
 
   describe 'validations' do
-     it { expect(subject).to validate_uniqueness_of(:product_id) }
-     it { expect(subject).to validate_numericality_of(:quantity).is_greater_than_or_equal_to(0) }
-     it { expect(subject).to validate_numericality_of(:quantity).only_integer }
+    it { expect(subject).to validate_uniqueness_of(:product_id) }
+    it { expect(subject).to validate_numericality_of(:quantity).is_greater_than_or_equal_to(0) }
+    it { expect(subject).to validate_numericality_of(:quantity).only_integer }
   end
 
   describe 'relations' do

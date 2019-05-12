@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 products_attributes = [
   { name: 'Grill', price: 39.99 },
   { name: 'Ketchup', price: 3.79 },

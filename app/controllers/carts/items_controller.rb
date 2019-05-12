@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Carts
   class ItemsController < ApplicationController
     def create
@@ -20,8 +22,8 @@ module Carts
 
     def render_response(status = :ok)
       render json: {
-         items: serialized_collection(Item.all, ItemSerializer),
-         discounts: serialized_collection(Discount.all, DiscountSerializer),
+        items: serialized_collection(Item.all, ItemSerializer),
+        discounts: serialized_collection(Discount.all, DiscountSerializer)
       }, status: status
     end
   end

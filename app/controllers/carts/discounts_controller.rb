@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Carts
   class DiscountsController < ApplicationController
     def create
@@ -14,13 +16,13 @@ module Carts
     private
 
     def discount_params
-      params.permit(:kind, :name, :count, :price, product_ids:[])
+      params.permit(:kind, :name, :count, :price, product_ids: [])
     end
 
     def render_response(status = :ok)
       render json: {
-         items: serialized_collection(Item.all, ItemSerializer),
-         discounts: serialized_collection(Discount.all, DiscountSerializer),
+        items: serialized_collection(Item.all, ItemSerializer),
+        discounts: serialized_collection(Discount.all, DiscountSerializer)
       }, status: status
     end
   end

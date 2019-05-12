@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Discount, type: :model do
@@ -16,28 +18,28 @@ RSpec.describe Discount, type: :model do
   end
 
   describe 'validations' do
-    context "standard validations" do
+    context 'standard validations' do
       it { expect(subject).to validate_presence_of(:name) }
-      it { expect(subject).to validate_inclusion_of(:kind).in_array(["set", "extra"]) }
+      it { expect(subject).to validate_inclusion_of(:kind).in_array(%w[set extra]) }
     end
 
-    context "custom validations - sets" do
-      subject { FactoryBot.build(:discount, name: 'BBQ', kind: 'set', price:nil, count:nil) }
+    context 'custom validations - sets' do
+      subject { FactoryBot.build(:discount, name: 'BBQ', kind: 'set', price: nil, count: nil) }
       it 'validates presence of price for sets' do
         expect(subject).to_not be_valid
       end
-      subject { FactoryBot.build(:discount, name: 'BBQ', kind: 'set', price:11.99, count:2) }
+      subject { FactoryBot.build(:discount, name: 'BBQ', kind: 'set', price: 11.99, count: 2) }
       it 'validates absence of count for sets' do
         expect(subject).to_not be_valid
       end
     end
 
-    context "custom validations - extras" do
-      subject { FactoryBot.build(:discount, name: '3 for 2', kind: 'extra', price:nil, count:nil) }
+    context 'custom validations - extras' do
+      subject { FactoryBot.build(:discount, name: '3 for 2', kind: 'extra', price: nil, count: nil) }
       it 'validates presence of count for extras' do
         expect(subject).to_not be_valid
       end
-      subject { FactoryBot.build(:discount, name: '3 for 2', kind: 'extra', price:11.99, count:2) }
+      subject { FactoryBot.build(:discount, name: '3 for 2', kind: 'extra', price: 11.99, count: 2) }
       it 'validates absence of price for sets' do
         expect(subject).to_not be_valid
       end
