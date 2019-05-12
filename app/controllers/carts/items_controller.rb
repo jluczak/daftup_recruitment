@@ -15,7 +15,7 @@ module Carts
     private
 
     def item_params
-      params.require(:item).permit(:quantity, :product_id)
+      params.permit(:quantity, :product_id)
     end
 
     def render_response(status = :success)
