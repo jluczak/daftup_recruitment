@@ -3,7 +3,7 @@ module Carts
     def create
       item = Item.find_by(product_id: params[:product_id])
       item.present? ? item.increase_quantity(params[:quantity]) : Item.create(item_params)
-      render_response
+      render_response(:created)
     end
 
     def update
@@ -18,11 +18,11 @@ module Carts
       params.require(:item).permit(:quantity, :product_id)
     end
 
-    def render_response
+    def render_response(status = :success)
       render json: {
          items: serialized_collection(Item.all, ItemSerializer),
          discounts: serialized_collection(Discount.all, DiscountSerializer),
-      }
+      }, status: status
     end
   end
 end

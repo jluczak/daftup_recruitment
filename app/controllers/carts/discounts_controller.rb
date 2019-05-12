@@ -2,7 +2,7 @@ module Carts
   class DiscountsController < ApplicationController
     def create
       Discount.create(discount_params)
-      render_response
+      render_response(status = :success)
     end
 
     def update
@@ -17,11 +17,11 @@ module Carts
       params.permit(:kind, :name, :count, :price, product_ids:[])
     end
 
-    def render_response
+    def render_response(status = :success)
       render json: {
          items: serialized_collection(Item.all, ItemSerializer),
          discounts: serialized_collection(Discount.all, DiscountSerializer),
-      }
+      }, status: status
     end
   end
 end
