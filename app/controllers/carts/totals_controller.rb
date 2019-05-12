@@ -2,7 +2,15 @@ module Carts
   class TotalsController < ApplicationController
     def show
       com = find_optimal_combination()
-      render json: com.key(com.values.min)
+      best_choice = com.key(com.values.min)
+      sets, extras = [], []
+      best_choice.each{|discount|
+        discount.kind == "set" ? sets << discount : extras << discount}
+      render json: {
+         sets: serialized_collection(sets, DiscountSerializer),
+         extras: serialized_collection(extras, DiscountSerializer),
+         regular_price: com["no discounts"],
+      }
     end
 
     def count_total_no_discount(items_left)
